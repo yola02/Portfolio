@@ -21,19 +21,19 @@
 
   <h2>1. Ranking the Safest Countries</h2>
   <div class="chart-block" id="chart1"></div>
-  <p>This horizontal bar chart ranks the top 20 countries by Travel Safety Index, from Iceland (safest) to Portugal (lowest in this group). Bar length makes it easy to compare every country's score at a glance. Color shows a separate measure — each country's Risk Level rating (Low/Medium/High) — rather than the axis score itself. Portugal is labeled "Low" risk despite having the lowest score here: not an error, but a sign that Risk Level and Travel Safety Index weigh different factors and don't always agree.</p>
+  <p>Figure 1. Top 20 countries by Travel Safety Index, colored by risk level. A horizontal bar chart ranking countries from Iceland (safest) to Portugal (lowest in this group). Bar length shows the score, while color shows a separate Risk Level rating (Low/Medium/High). Portugal is rated "Low" risk despite having the lowest score because the two measures weigh different factors.</p>
 
   <h2>2. Zooming In on the Safest of the Safe</h2>
   <div class="chart-block" id="chart2"></div>
-  <p>This variation switches from bars to dots and narrows the x-axis to 50–100 instead of 0–100. A bar's length has to start at zero to represent magnitude honestly, so truncating a bar chart's axis would be misleading — a dot plot has no such requirement, which is why the mark type changes here too. The narrower range gives the safest countries a bit more visual separation than the full 0–100 scale, though the ranking and pattern are the same as the first chart.</p>
+  <p>Figure 2. Dot plot of the same ranking with the x axis narrowed to 50–100. Dots replace bars because a bar's length must start at zero to be honest, while a dot plot has no such requirement. The narrower range separates the safest countries more clearly, but the ranking matches Figure 1.</p>
 
   <h2>3. Color as Magnitude, Not Category</h2>
   <div class="chart-block" id="chart3"></div>
-  <p>Here, color encodes the exact same value already shown on the x-axis — Travel Safety Index — using a blue gradient instead of a separate categorical rating. This trades away the extra risk-level information from the first chart, but produces a chart that's internally consistent: the color can never visually disagree with the bar length, since they're both reflecting the same number.</p>
+  <p>Figure 3. Dot plot colored by Travel Safety Index. Color encodes the same value as the x axis, using a blue gradient instead of a risk category. This drops the risk level information from Figure 1 but keeps color and position consistent.</p>
 
   <h2>4. Do Two Safety Measures Agree?</h2>
   <div class="chart-block" id="chart4"></div>
-  <p>This chart drops the ranking format and instead plots two independent safety measures against each other: Global Peace Index on the x-axis and Travel Safety Index on the y-axis. A dashed trend line shows the overall relationship between the two. Most countries sit close to that line, meaning the two measures broadly agree — but Portugal falls well below it, scoring far lower on Travel Safety Index than its Global Peace Index would predict, making it a clear outlier here too.</p>
+  <p>Figure 4. Global Peace Index against Travel Safety Index, with a trend line. This scatter plot compares two independent safety measures, and the dashed line shows their overall relationship. Most countries sit near the line, but Portugal falls well below it, making it an outlier.</p>
 
   <script>
     const spec1 = {
