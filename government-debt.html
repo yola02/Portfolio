@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Government Debt: Redesigning a Misleading Chart | Yola Charara</title>
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet" />
+    <link href="templatemo_531_reflux/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+      body { font-family: "Lato", sans-serif; color: #2b2b2b; background: #ffffff; line-height: 1.7; }
+      .project-page { max-width: 1000px; margin: 0 auto; padding: 48px 20px 80px; }
+      .back-link { display: inline-block; margin-bottom: 28px; color: #555; text-decoration: none; font-weight: 700; }
+      .back-link:hover { color: #000; }
+      h1 { font-weight: 900; font-size: 34px; margin-bottom: 8px; }
+      h2 { font-weight: 700; font-size: 24px; margin: 48px 0 6px; }
+      .intro { color: #555; font-size: 18px; margin-bottom: 8px; }
+      .chart-box { margin: 20px 0 22px; border: 1px solid #e3e0d8; background: #fbfaf7; padding: 10px; overflow-x: auto; }
+      .chart-box img { max-width: 100%; height: auto; display: block; }
+      .caption { font-size: 14px; color: #666; margin-top: -10px; margin-bottom: 18px; }
+      .sources { font-size: 15px; color: #555; margin-top: 40px; border-top: 1px solid #e3e0d8; padding-top: 18px; }
+      .sources a { color: #2b2b2b; text-decoration: underline; }
+    </style>
+  </head>
+
+  <body>
+    <div class="project-page">
+      <a class="back-link" href="index.html#section5">&larr; Back to portfolio</a>
+
+      <h1>Government Debt: Redesigning a Misleading Chart</h1>
+      <p class="intro">
+        A before and after study of a real infographic that compares government debt
+        across countries, rebuilt with Vega-Lite.
+      </p>
+
+      <h2>Before: the original chart</h2>
+      <div class="chart-box">
+        <img
+          src="templatemo_531_reflux/assets/images/original-government-debt.png"
+          alt="Original Sankey style infographic titled Countries with the Most Government Debt, linking debt as a share of GDP on the left to debt in dollars on the right"
+        />
+      </div>
+      <p class="caption">
+        Original: "Countries with the Most Government Debt" by Visual Capitalist, shared on
+        <a href="https://www.reddit.com/r/Infographics/comments/1vxzrvc/ranked_countries_with_the_most_government_debt_in/" target="_blank" rel="noopener">r/Infographics</a>.
+      </p>
+      <p>
+        The original uses a Sankey chart to link two different rankings, debt as a share of
+        GDP and debt in dollars. A Sankey chart shows flow between categories, and nothing
+        flows between these two measures. Each side shows only its own top 30, so 34
+        countries have ribbons that fade out with no match on the other side. About 30
+        crossing ribbons make it hard to follow one country, and evenly spaced ranks hide
+        how big the gaps really are.
+      </p>
+
+      <h2>After: my redesign</h2>
+      <div class="chart-box">
+        <div id="chart">Loading chart...</div>
+      </div>
+      <p class="caption">Hover over any point to see the exact values for that country.</p>
+      <p>
+        I rebuilt it as a scatter plot of the same 47 countries, using the same IMF data
+        from April 2026. Debt in dollars (log scale) is on the x axis and debt as a share
+        of GDP is on the y axis. I chose a scatter plot because each country has two
+        numbers and it shows both at once. I rejected a slope chart because it has the same
+        problems as the Sankey chart, two bar charts because they cannot show the
+        relationship, and a map because small countries like Singapore and Bahrain would
+        disappear. Every country now has both values and a direct label. The chart also
+        shows that only 13 of the 47 countries appear in both rankings. Sudan, Bahrain and
+        the Maldives are heavily indebted but small in dollars, while Germany and India owe
+        a lot but less than their whole economy.
+      </p>
+
+      <p class="sources">
+        <strong>Data:</strong> IMF World Economic Outlook, April 2026
+        (<a href="https://data.imf.org/en/datasets/IMF.RES:WEO" target="_blank" rel="noopener">IMF data portal</a>).
+        Debt in dollars is debt as a share of GDP multiplied by nominal GDP.
+        <a href="gov_debt_2026.csv">Download the dataset</a> |
+        <a href="gov_debt_scatter.vl.json">View the Vega-Lite specification</a>
+      </p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+    <script>
+      // Change this if your CSV has a different file name or folder.
+      var CSV_URL = "https://raw.githubusercontent.com/yola02/Portfolio/refs/heads/main/gov_debt_2026.csv";
+      var FALLBACK_IMG = "templatemo_531_reflux/assets/images/government-debt-redesign.png";
+
+      fetch("gov_debt_scatter.vl.json")
+        .then(function (r) { return r.json(); })
+        .then(function (spec) {
+          spec.data = { url: CSV_URL };
+          return vegaEmbed("#chart", spec, { actions: false });
+        })
+        .catch(function () {
+          document.getElementById("chart").innerHTML =
+            '<img src="' + FALLBACK_IMG + '" alt="Scatter plot of government debt in dollars against debt as a share of GDP for 47 countries" />';
+        });
+    </script>
+  </body>
+</html>
