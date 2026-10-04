@@ -44,12 +44,7 @@
         <a href="https://www.reddit.com/r/Infographics/comments/1vxzrvc/ranked_countries_with_the_most_government_debt_in/" target="_blank" rel="noopener">r/Infographics</a>.
       </p>
       <p>
-        The original uses a Sankey chart to link two different rankings, debt as a share of
-        GDP and debt in dollars. A Sankey chart shows flow between categories, and nothing
-        flows between these two measures. Each side shows only its own top 30, so 34
-        countries have ribbons that fade out with no match on the other side. About 30
-        crossing ribbons make it hard to follow one country, and evenly spaced ranks hide
-        how big the gaps really are.
+        Figure 1. Original chart: Countries with the Most Government Debt (Visual Capitalist). A Sankey chart links two separate rankings, debt as a share of GDP and debt in dollars, but nothing flows between them. Each side shows only its own top 30, so 34 countries have ribbons that fade out, and about 30 crossing ribbons make it hard to follow any one country.
       </p>
 
       <h2>After: my redesign</h2>
@@ -58,16 +53,11 @@
       </div>
       <p class="caption">Hover over any point to see the exact values for that country.</p>
       <p>
-        I rebuilt it as a scatter plot of the same 47 countries, using the same IMF data
-        from April 2026. Debt in dollars (log scale) is on the x axis and debt as a share
-        of GDP is on the y axis. I chose a scatter plot because each country has two
-        numbers and it shows both at once. I rejected a slope chart because it has the same
-        problems as the Sankey chart, two bar charts because they cannot show the
-        relationship, and a map because small countries like Singapore and Bahrain would
-        disappear. Every country now has both values and a direct label. The chart also
-        shows that only 13 of the 47 countries appear in both rankings. Sudan, Bahrain and
-        the Maldives are heavily indebted but small in dollars, while Germany and India owe
-        a lot but less than their whole economy.
+        Figure 2. Redesign: government debt in dollars against debt as a share of GDP for 47 countries. A scatter plot shows both measures for every country at once, using the same IMF data. Only 13 countries appear in both of the original rankings. Sudan, Bahrain and the Maldives are heavily indebted but small in dollars, while Germany and India owe a lot but less than their whole economy. Hover over a point to see exact values.
+      
+        Design decisions:
+        I chose a scatter plot because each country has two numbers, and it shows both at once with no ribbons to trace. I used a log scale for the dollar axis because debts range from about $1 billion to over $40 trillion. I rejected a slope chart because it has the same problems as the Sankey chart, two bar charts because they cannot show the relationship between the measures, and a map because small countries like Singapore and Bahrain would disappear.
+
       </p>
 
       <p class="sources">
