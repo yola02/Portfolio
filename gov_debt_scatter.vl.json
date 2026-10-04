@@ -1,0 +1,1228 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 880,
+  "height": 600,
+  "background": "#fbfaf7",
+  "padding": {
+    "left": 12,
+    "right": 16,
+    "top": 10,
+    "bottom": 10
+  },
+  "title": {
+    "text": "The biggest government debts are not the heaviest ones",
+    "subtitle": [
+      "Government debt in 2026 (IMF projection) for the 47 countries that appear in either top-30 ranking of the original chart.",
+      "Only 13 of the 47 appear in both rankings, so each ranking alone leaves out 17 of them.",
+      "Source: IMF World Economic Outlook, April 2026. Debt in USD = debt % of GDP \u00d7 nominal GDP."
+    ],
+    "anchor": "start",
+    "fontSize": 22,
+    "subtitleFontSize": 12.5,
+    "subtitleColor": "#555",
+    "subtitleLineHeight": 17,
+    "offset": 16
+  },
+  "data": {
+    "url": "https://raw.githubusercontent.com/yola02/Portfolio/refs/heads/main/gov_debt_2026.csv"
+  },
+  "transform": [
+    {
+      "lookup": "iso",
+      "from": {
+        "data": {
+          "values": [
+            {
+              "iso": "JPN",
+              "name": "Japan",
+              "group": "Asia-Pacific",
+              "pos": "r"
+            },
+            {
+              "iso": "SGP",
+              "name": "Singapore",
+              "group": "Asia-Pacific",
+              "pos": "r"
+            },
+            {
+              "iso": "BHR",
+              "name": "Bahrain",
+              "group": "Asia-Pacific",
+              "pos": "r"
+            },
+            {
+              "iso": "MDV",
+              "name": "Maldives",
+              "group": "Asia-Pacific",
+              "pos": "l"
+            },
+            {
+              "iso": "BTN",
+              "name": "Bhutan",
+              "group": "Asia-Pacific",
+              "pos": "t"
+            },
+            {
+              "iso": "CHN",
+              "name": "China",
+              "group": "Asia-Pacific",
+              "pos": "r"
+            },
+            {
+              "iso": "IND",
+              "name": "India",
+              "group": "Asia-Pacific",
+              "pos": "r"
+            },
+            {
+              "iso": "AUS",
+              "name": "Australia",
+              "group": "Asia-Pacific",
+              "pos": "l"
+            },
+            {
+              "iso": "KOR",
+              "name": "South Korea",
+              "group": "Asia-Pacific",
+              "pos": "r"
+            },
+            {
+              "iso": "IDN",
+              "name": "Indonesia",
+              "group": "Asia-Pacific",
+              "pos": "callout"
+            },
+            {
+              "iso": "THA",
+              "name": "Thailand",
+              "group": "Asia-Pacific",
+              "pos": "l"
+            },
+            {
+              "iso": "ISR",
+              "name": "Israel",
+              "group": "Asia-Pacific",
+              "pos": "tr"
+            },
+            {
+              "iso": "SAU",
+              "name": "Saudi Arabia",
+              "group": "Asia-Pacific",
+              "pos": "l"
+            },
+            {
+              "iso": "TUR",
+              "name": "T\u00fcrkiye",
+              "group": "Asia-Pacific",
+              "pos": "l"
+            },
+            {
+              "iso": "SDN",
+              "name": "Sudan",
+              "group": "Africa",
+              "pos": "r"
+            },
+            {
+              "iso": "SEN",
+              "name": "Senegal",
+              "group": "Africa",
+              "pos": "r"
+            },
+            {
+              "iso": "MOZ",
+              "name": "Mozambique",
+              "group": "Africa",
+              "pos": "t"
+            },
+            {
+              "iso": "CPV",
+              "name": "Cabo Verde",
+              "group": "Africa",
+              "pos": "l"
+            },
+            {
+              "iso": "COG",
+              "name": "Rep. of Congo",
+              "group": "Africa",
+              "pos": "tr"
+            },
+            {
+              "iso": "MUS",
+              "name": "Mauritius",
+              "group": "Africa",
+              "pos": "bl"
+            },
+            {
+              "iso": "GAB",
+              "name": "Gabon",
+              "group": "Africa",
+              "pos": "br"
+            },
+            {
+              "iso": "EGY",
+              "name": "Egypt",
+              "group": "Africa",
+              "pos": "callout"
+            },
+            {
+              "iso": "ZAF",
+              "name": "South Africa",
+              "group": "Africa",
+              "pos": "callout"
+            },
+            {
+              "iso": "ITA",
+              "name": "Italy",
+              "group": "Europe",
+              "pos": "r"
+            },
+            {
+              "iso": "GRC",
+              "name": "Greece",
+              "group": "Europe",
+              "pos": "r"
+            },
+            {
+              "iso": "UKR",
+              "name": "Ukraine",
+              "group": "Europe",
+              "pos": "r"
+            },
+            {
+              "iso": "FRA",
+              "name": "France",
+              "group": "Europe",
+              "pos": "r"
+            },
+            {
+              "iso": "BEL",
+              "name": "Belgium",
+              "group": "Europe",
+              "pos": "l"
+            },
+            {
+              "iso": "GBR",
+              "name": "UK",
+              "group": "Europe",
+              "pos": "r"
+            },
+            {
+              "iso": "ESP",
+              "name": "Spain",
+              "group": "Europe",
+              "pos": "bl"
+            },
+            {
+              "iso": "FIN",
+              "name": "Finland",
+              "group": "Europe",
+              "pos": "r"
+            },
+            {
+              "iso": "DEU",
+              "name": "Germany",
+              "group": "Europe",
+              "pos": "r"
+            },
+            {
+              "iso": "POL",
+              "name": "Poland",
+              "group": "Europe",
+              "pos": "b"
+            },
+            {
+              "iso": "NLD",
+              "name": "Netherlands",
+              "group": "Europe",
+              "pos": "callout"
+            },
+            {
+              "iso": "AUT",
+              "name": "Austria",
+              "group": "Europe",
+              "pos": "r"
+            },
+            {
+              "iso": "RUS",
+              "name": "Russia",
+              "group": "Europe",
+              "pos": "r"
+            },
+            {
+              "iso": "CHE",
+              "name": "Switzerland",
+              "group": "Europe",
+              "pos": "l"
+            },
+            {
+              "iso": "USA",
+              "name": "US",
+              "group": "North America",
+              "pos": "l"
+            },
+            {
+              "iso": "CAN",
+              "name": "Canada",
+              "group": "North America",
+              "pos": "l"
+            },
+            {
+              "iso": "MEX",
+              "name": "Mexico",
+              "group": "North America",
+              "pos": "r"
+            },
+            {
+              "iso": "VCT",
+              "name": "St. Vincent",
+              "group": "North America",
+              "pos": "t"
+            },
+            {
+              "iso": "DMA",
+              "name": "Dominica",
+              "group": "North America",
+              "pos": "b"
+            },
+            {
+              "iso": "BRB",
+              "name": "Barbados",
+              "group": "North America",
+              "pos": "t"
+            },
+            {
+              "iso": "BRA",
+              "name": "Brazil",
+              "group": "South America",
+              "pos": "br"
+            },
+            {
+              "iso": "BOL",
+              "name": "Bolivia",
+              "group": "South America",
+              "pos": "r"
+            },
+            {
+              "iso": "SUR",
+              "name": "Suriname",
+              "group": "South America",
+              "pos": "bl"
+            },
+            {
+              "iso": "ARG",
+              "name": "Argentina",
+              "group": "South America",
+              "pos": "callout"
+            }
+          ]
+        },
+        "key": "iso",
+        "fields": [
+          "name",
+          "group",
+          "pos"
+        ]
+      }
+    },
+    {
+      "filter": "datum.group != null"
+    }
+  ],
+  "layer": [
+    {
+      "data": {
+        "values": [
+          {
+            "y": 100,
+            "y2": 215
+          }
+        ]
+      },
+      "mark": {
+        "type": "rect",
+        "color": "#c0392b",
+        "opacity": 0.06
+      },
+      "encoding": {
+        "x": {
+          "value": 0
+        },
+        "x2": {
+          "value": 880
+        },
+        "y": {
+          "field": "y",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              215
+            ],
+            "nice": false
+          }
+        },
+        "y2": {
+          "field": "y2"
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "y": 100
+          }
+        ]
+      },
+      "mark": {
+        "type": "rule",
+        "strokeDash": [
+          6,
+          4
+        ],
+        "color": "#8e2b20",
+        "strokeWidth": 1.3
+      },
+      "encoding": {
+        "y": {
+          "field": "y",
+          "type": "quantitative"
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "y": 211,
+            "t": "Shaded area: debt larger than the whole economy (over 100% of GDP)"
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 8,
+        "color": "#8e2b20",
+        "fontSize": 11.5,
+        "fontStyle": "italic"
+      },
+      "encoding": {
+        "x": {
+          "value": 0
+        },
+        "y": {
+          "field": "y",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "t"
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "y": 196,
+            "t": "Heavy burden, small in dollars"
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 8,
+        "color": "#7a7a7a",
+        "fontSize": 12.5,
+        "fontWeight": "bold"
+      },
+      "encoding": {
+        "x": {
+          "value": 0
+        },
+        "y": {
+          "field": "y",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              215
+            ],
+            "nice": false
+          }
+        },
+        "text": {
+          "field": "t"
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "y": 7,
+            "t": "Huge in dollars, moderate burden"
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "dx": -8,
+        "color": "#7a7a7a",
+        "fontSize": 12.5,
+        "fontWeight": "bold"
+      },
+      "encoding": {
+        "x": {
+          "value": 880
+        },
+        "y": {
+          "field": "y",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              215
+            ],
+            "nice": false
+          }
+        },
+        "text": {
+          "field": "t"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "lookup": "iso",
+          "from": {
+            "data": {
+              "values": [
+                {
+                  "iso": "IDN",
+                  "lx": 1050,
+                  "ly": 38.5,
+                  "calign": "left"
+                },
+                {
+                  "iso": "EGY",
+                  "lx": 170,
+                  "ly": 90,
+                  "calign": "right"
+                },
+                {
+                  "iso": "ZAF",
+                  "lx": 170,
+                  "ly": 82,
+                  "calign": "right"
+                },
+                {
+                  "iso": "NLD",
+                  "lx": 1050,
+                  "ly": 44.5,
+                  "calign": "left"
+                },
+                {
+                  "iso": "ARG",
+                  "lx": 230,
+                  "ly": 75.5,
+                  "calign": "right"
+                }
+              ]
+            },
+            "key": "iso",
+            "fields": [
+              "lx",
+              "ly",
+              "calign"
+            ]
+          }
+        },
+        {
+          "filter": "datum.lx != null"
+        }
+      ],
+      "mark": {
+        "type": "rule",
+        "color": "#9a9a9a",
+        "strokeWidth": 0.8
+      },
+      "encoding": {
+        "x": {
+          "field": "debt_usd_bn",
+          "type": "quantitative",
+          "scale": {
+            "type": "log",
+            "domain": [
+              0.5,
+              80000
+            ],
+            "nice": false
+          }
+        },
+        "y": {
+          "field": "debt_pct_gdp",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              215
+            ],
+            "nice": false
+          }
+        },
+        "x2": {
+          "field": "lx"
+        },
+        "y2": {
+          "field": "ly"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 110,
+        "opacity": 0.8,
+        "stroke": "white",
+        "strokeWidth": 1.2
+      },
+      "encoding": {
+        "x": {
+          "field": "debt_usd_bn",
+          "type": "quantitative",
+          "scale": {
+            "type": "log",
+            "domain": [
+              0.5,
+              80000
+            ],
+            "nice": false
+          },
+          "axis": {
+            "title": "Government debt in US dollars (log scale: each gridline is 10\u00d7 the previous)",
+            "values": [
+              1,
+              10,
+              100,
+              1000,
+              10000
+            ],
+            "labelExpr": "datum.value >= 1000 ? '$' + (datum.value/1000) + ' trillion' : '$' + datum.value + ' billion'",
+            "grid": true,
+            "gridColor": "#e6e2d8",
+            "titleFontWeight": "normal",
+            "titlePadding": 12
+          }
+        },
+        "y": {
+          "field": "debt_pct_gdp",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              215
+            ],
+            "nice": false
+          },
+          "axis": {
+            "title": "Government debt as % of GDP",
+            "values": [
+              0,
+              20,
+              40,
+              60,
+              80,
+              100,
+              120,
+              140,
+              160,
+              180,
+              200
+            ],
+            "labelExpr": "datum.value + '%'",
+            "grid": true,
+            "gridColor": "#e6e2d8",
+            "titleFontWeight": "normal",
+            "titlePadding": 12
+          }
+        },
+        "color": {
+          "field": "group",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "Asia-Pacific",
+              "Africa",
+              "Europe",
+              "North America",
+              "South America"
+            ],
+            "range": [
+              "#D55E00",
+              "#009E73",
+              "#0072B2",
+              "#CC79A7",
+              "#E69F00"
+            ]
+          },
+          "legend": {
+            "title": null,
+            "orient": "top",
+            "direction": "horizontal",
+            "symbolSize": 110,
+            "labelFontSize": 12,
+            "columns": 5
+          }
+        },
+        "shape": {
+          "field": "group",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "Asia-Pacific",
+              "Africa",
+              "Europe",
+              "North America",
+              "South America"
+            ],
+            "range": [
+              "circle",
+              "square",
+              "diamond",
+              "triangle-up",
+              "triangle-down"
+            ]
+          }
+        },
+        "tooltip": [
+          {
+            "field": "name",
+            "title": "Country"
+          },
+          {
+            "field": "group",
+            "title": "Region"
+          },
+          {
+            "field": "debt_pct_gdp",
+            "title": "Debt, % of GDP",
+            "format": ".1f"
+          },
+          {
+            "field": "debt_usd_bn",
+            "title": "Debt, USD billions",
+            "format": ",.0f"
+          },
+          {
+            "field": "gdp_usd_bn",
+            "title": "GDP, USD billions",
+            "format": ",.0f"
+          }
+        ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.pos == 'r'"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "middle",
+        "dx": 9,
+        "dy": 0,
+        "fontSize": 11.5,
+        "color": "#222"
+      },
+      "encoding": {
+        "x": {
+          "field": "debt_usd_bn",
+          "type": "quantitative",
+          "scale": {
+            "type": "log",
+            "domain": [
+              0.5,
+              80000
+            ],
+            "nice": false
+          }
+        },
+        "y": {
+          "field": "debt_pct_gdp",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              215
+            ],
+            "nice": false
+          }
+        },
+        "text": {
+          "field": "name"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.pos == 'l'"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "baseline": "middle",
+        "dx": -9,
+        "dy": 0,
+        "fontSize": 11.5,
+        "color": "#222"
+      },
+      "encoding": {
+        "x": {
+          "field": "debt_usd_bn",
+          "type": "quantitative",
+          "scale": {
+            "type": "log",
+            "domain": [
+              0.5,
+              80000
+            ],
+            "nice": false
+          }
+        },
+        "y": {
+          "field": "debt_pct_gdp",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              215
+            ],
+            "nice": false
+          }
+        },
+        "text": {
+          "field": "name"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.pos == 't'"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "center",
+        "baseline": "middle",
+        "dx": 0,
+        "dy": -10,
+        "fontSize": 11.5,
+        "color": "#222"
+      },
+      "encoding": {
+        "x": {
+          "field": "debt_usd_bn",
+          "type": "quantitative",
+          "scale": {
+            "type": "log",
+            "domain": [
+              0.5,
+              80000
+            ],
+            "nice": false
+          }
+        },
+        "y": {
+          "field": "debt_pct_gdp",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              215
+            ],
+            "nice": false
+          }
+        },
+        "text": {
+          "field": "name"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.pos == 'b'"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "center",
+        "baseline": "middle",
+        "dx": 0,
+        "dy": 11,
+        "fontSize": 11.5,
+        "color": "#222"
+      },
+      "encoding": {
+        "x": {
+          "field": "debt_usd_bn",
+          "type": "quantitative",
+          "scale": {
+            "type": "log",
+            "domain": [
+              0.5,
+              80000
+            ],
+            "nice": false
+          }
+        },
+        "y": {
+          "field": "debt_pct_gdp",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              215
+            ],
+            "nice": false
+          }
+        },
+        "text": {
+          "field": "name"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.pos == 'tr'"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "middle",
+        "dx": 7,
+        "dy": -10,
+        "fontSize": 11.5,
+        "color": "#222"
+      },
+      "encoding": {
+        "x": {
+          "field": "debt_usd_bn",
+          "type": "quantitative",
+          "scale": {
+            "type": "log",
+            "domain": [
+              0.5,
+              80000
+            ],
+            "nice": false
+          }
+        },
+        "y": {
+          "field": "debt_pct_gdp",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              215
+            ],
+            "nice": false
+          }
+        },
+        "text": {
+          "field": "name"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.pos == 'br'"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "middle",
+        "dx": 7,
+        "dy": 11,
+        "fontSize": 11.5,
+        "color": "#222"
+      },
+      "encoding": {
+        "x": {
+          "field": "debt_usd_bn",
+          "type": "quantitative",
+          "scale": {
+            "type": "log",
+            "domain": [
+              0.5,
+              80000
+            ],
+            "nice": false
+          }
+        },
+        "y": {
+          "field": "debt_pct_gdp",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              215
+            ],
+            "nice": false
+          }
+        },
+        "text": {
+          "field": "name"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.pos == 'bl'"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "baseline": "middle",
+        "dx": -7,
+        "dy": 11,
+        "fontSize": 11.5,
+        "color": "#222"
+      },
+      "encoding": {
+        "x": {
+          "field": "debt_usd_bn",
+          "type": "quantitative",
+          "scale": {
+            "type": "log",
+            "domain": [
+              0.5,
+              80000
+            ],
+            "nice": false
+          }
+        },
+        "y": {
+          "field": "debt_pct_gdp",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              215
+            ],
+            "nice": false
+          }
+        },
+        "text": {
+          "field": "name"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "lookup": "iso",
+          "from": {
+            "data": {
+              "values": [
+                {
+                  "iso": "IDN",
+                  "lx": 1050,
+                  "ly": 38.5,
+                  "calign": "left"
+                },
+                {
+                  "iso": "EGY",
+                  "lx": 170,
+                  "ly": 90,
+                  "calign": "right"
+                },
+                {
+                  "iso": "ZAF",
+                  "lx": 170,
+                  "ly": 82,
+                  "calign": "right"
+                },
+                {
+                  "iso": "NLD",
+                  "lx": 1050,
+                  "ly": 44.5,
+                  "calign": "left"
+                },
+                {
+                  "iso": "ARG",
+                  "lx": 230,
+                  "ly": 75.5,
+                  "calign": "right"
+                }
+              ]
+            },
+            "key": "iso",
+            "fields": [
+              "lx",
+              "ly",
+              "calign"
+            ]
+          }
+        },
+        {
+          "filter": "datum.lx != null && datum.calign == 'left'"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "middle",
+        "dx": 4,
+        "fontSize": 11.5,
+        "color": "#222"
+      },
+      "encoding": {
+        "x": {
+          "field": "lx",
+          "type": "quantitative",
+          "scale": {
+            "type": "log",
+            "domain": [
+              0.5,
+              80000
+            ],
+            "nice": false
+          }
+        },
+        "y": {
+          "field": "ly",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              215
+            ],
+            "nice": false
+          }
+        },
+        "text": {
+          "field": "name"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "lookup": "iso",
+          "from": {
+            "data": {
+              "values": [
+                {
+                  "iso": "IDN",
+                  "lx": 1050,
+                  "ly": 38.5,
+                  "calign": "left"
+                },
+                {
+                  "iso": "EGY",
+                  "lx": 170,
+                  "ly": 90,
+                  "calign": "right"
+                },
+                {
+                  "iso": "ZAF",
+                  "lx": 170,
+                  "ly": 82,
+                  "calign": "right"
+                },
+                {
+                  "iso": "NLD",
+                  "lx": 1050,
+                  "ly": 44.5,
+                  "calign": "left"
+                },
+                {
+                  "iso": "ARG",
+                  "lx": 230,
+                  "ly": 75.5,
+                  "calign": "right"
+                }
+              ]
+            },
+            "key": "iso",
+            "fields": [
+              "lx",
+              "ly",
+              "calign"
+            ]
+          }
+        },
+        {
+          "filter": "datum.lx != null && datum.calign == 'right'"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "baseline": "middle",
+        "dx": -4,
+        "fontSize": 11.5,
+        "color": "#222"
+      },
+      "encoding": {
+        "x": {
+          "field": "lx",
+          "type": "quantitative",
+          "scale": {
+            "type": "log",
+            "domain": [
+              0.5,
+              80000
+            ],
+            "nice": false
+          }
+        },
+        "y": {
+          "field": "ly",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              215
+            ],
+            "nice": false
+          }
+        },
+        "text": {
+          "field": "name"
+        }
+      }
+    }
+  ],
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "font": "Helvetica, Arial, sans-serif",
+    "axis": {
+      "labelFontSize": 11.5,
+      "titleFontSize": 12.5,
+      "titleColor": "#333",
+      "labelColor": "#555",
+      "domain": false,
+      "ticks": false
+    }
+  }
+}
