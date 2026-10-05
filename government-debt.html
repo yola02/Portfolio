@@ -16,7 +16,7 @@
       .intro { color: #555; font-size: 18px; margin-bottom: 8px; }
       .chart-box { margin: 20px 0 22px; border: 1px solid #e3e0d8; background: #fbfaf7; padding: 10px; overflow-x: auto; }
       .chart-box img { max-width: 100%; height: auto; display: block; }
-      .caption { font-size: 14px; color: #666; margin-top: -10px; margin-bottom: 18px; }
+      .caption { font-size: 15px; color: #444; margin-top: -10px; margin-bottom: 18px; }
       .sources { font-size: 15px; color: #555; margin-top: 40px; border-top: 1px solid #e3e0d8; padding-top: 18px; }
       .sources a { color: #2b2b2b; text-decoration: underline; }
     </style>
@@ -24,7 +24,7 @@
 
   <body>
     <div class="project-page">
-      <a class="back-link" href="index.html#section5">&larr; Back to portfolio</a>
+      <a class="back-link" href="index.html">&larr; Back to portfolio</a>
 
       <h1>Government Debt: Redesigning a Misleading Chart</h1>
       <p class="intro">
@@ -40,30 +40,28 @@
         />
       </div>
       <p class="caption">
-        Original: "Countries with the Most Government Debt" by Visual Capitalist, shared on
+        Figure 1. Original chart: Countries with the Most Government Debt by Visual Capitalist, shared on
         <a href="https://www.reddit.com/r/Infographics/comments/1vxzrvc/ranked_countries_with_the_most_government_debt_in/" target="_blank" rel="noopener">r/Infographics</a>.
-      </p>
-      <p>
-        Figure 1. Original chart: Countries with the Most Government Debt (Visual Capitalist). A Sankey chart links two separate rankings, debt as a share of GDP and debt in dollars, but nothing flows between them. Each side shows only its own top 30, so 34 countries have ribbons that fade out, and about 30 crossing ribbons make it hard to follow any one country.
       </p>
 
       <h2>After: My Redesign</h2>
       <div class="chart-box">
         <div id="chart">Loading chart...</div>
       </div>
-      <p class="caption">Hover over any point to see the exact values for that country.</p>
-      <p>
-        Figure 2. Redesign: government debt in dollars against debt as a share of GDP for 47 countries. A scatter plot shows both measures for every country at once, using the same IMF data. Only 13 countries appear in both of the original rankings. Sudan, Bahrain and the Maldives are heavily indebted but small in dollars, while Germany and India owe a lot but less than their whole economy. Hover over a point to see exact values.
+      <p class="caption">
+        Figure 2. Redesign: government debt in dollars against debt as a share of GDP for 47 countries, using IMF data. Hover over a point to see exact values.
       </p>
-      
-        <h2>Design Decisions</h2>
-        <p>
-        I chose a scatter plot because each country has two numbers, and it shows both at once with no ribbons to trace. I used a log scale for the dollar axis because debts range from about $1 billion to over $40 trillion. I rejected a slope chart because it has the same problems as the Sankey chart, two bar charts because they cannot show the relationship between the measures, and a map because small countries like Singapore and Bahrain would disappear.
 
+      <h2>Design Decisions</h2>
+      <p>
+        The original chart is a Sankey chart that links two separate rankings, debt as a share of GDP and debt in dollars, but nothing flows between these measures. Each side shows only its own top 30, so 34 countries have ribbons that fade out with no match on the other side, and 47 overlapping ribbons make it hard to follow any one country. I replaced it with a scatter plot because each country has two numbers, and a scatter plot shows both at once. I kept the same 47 countries as the original so the comparison is fair, and I used a log scale for the dollar axis because debts range from about $1 billion to over $40 trillion. I rejected a slope chart because it has the same problems as the Sankey chart, two bar charts because they cannot show the relationship between the measures, and a map because small countries like Singapore and Bahrain would disappear.
+      </p>
+      <p>
+        The redesign shows every country with both values and a direct label, so nothing fades out and no ribbons need to be traced. It also shows that only 13 of the 47 countries appear in both of the original rankings. Sudan, Bahrain and the Maldives are heavily indebted compared to their economies but small in dollars, while Germany and India owe a lot of money but less than their whole economy.
       </p>
 
       <p class="sources">
-        <strong>Data:</strong> IMF World Economic Outlook, April 2026
+        Data: IMF World Economic Outlook, April 2026
         (<a href="https://data.imf.org/en/datasets/IMF.RES:WEO" target="_blank" rel="noopener">IMF data portal</a>).
         Debt in dollars is debt as a share of GDP multiplied by nominal GDP.
         <a href="gov_debt_2026.csv">Download the dataset</a> |
@@ -75,9 +73,8 @@
     <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
     <script>
-      // Change this if your CSV has a different file name or folder.
+      
       var CSV_URL = "https://raw.githubusercontent.com/yola02/Portfolio/refs/heads/main/gov_debt_2026.csv";
-      var FALLBACK_IMG = "templatemo_531_reflux/assets/images/government-debt-redesign.png";
 
       fetch("gov_debt_scatter.vl.json")
         .then(function (r) { return r.json(); })
@@ -87,7 +84,7 @@
         })
         .catch(function () {
           document.getElementById("chart").innerHTML =
-            '<img src="' + FALLBACK_IMG + '" alt="Scatter plot of government debt in dollars against debt as a share of GDP for 47 countries" />';
+            "The chart could not load. Please check that gov_debt_scatter.vl.json and the CSV are uploaded.";
         });
     </script>
   </body>
