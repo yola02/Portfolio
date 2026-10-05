@@ -17,6 +17,13 @@ Four interactive charts exploring how "safety" is measured differently across th
 - **Dataset:** [Safest Countries in the World 2026 (Kaggle)](https://www.kaggle.com/datasets/danishjmeo/safest-countries-in-the-world-2026-data)
 - **View it live:** [charts.html](https://yola02.github.io/Portfolio/charts.html)
 
+### Government Debt: Redesigning a Misleading Chart
+A before and after study of a Sankey infographic on government debt. The original links two unrelated rankings, so many countries fade out with no match. The redesign is an interactive scatter plot of the same 47 countries, showing debt in dollars and debt as a share of GDP together.
+
+- **Tools:** Vega-Lite, Python, pandas
+- **Dataset:** [IMF World Economic Outlook, April 2026](https://data.imf.org/en/datasets/IMF.RES:WEO)
+- **View it live:** [government-debt.html](https://yola02.github.io/Portfolio/government-debt.html)
+
 More projects will be added here as they're completed.
 
 ## Built With
@@ -29,3 +36,5 @@ More projects will be added here as they're completed.
 ## Credits
 
 Landing page adapted from the [Reflux](https://templatemo.com/tm-531-reflux) template by [TemplateMo](https://templatemo.com).
+
+Original government debt infographic by Visual Capitalist.
