@@ -1,0 +1,88 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {
+    "url": "temp_global_yearly.csv"
+  },
+  "width": "container",
+  "height": 320,
+  "title": {
+    "text": "Global temperature has risen, with the highest years at the end of the period",
+    "subtitle": "Yearly average anomaly vs 1951-1980 baseline, 2000-2025",
+    "anchor": "start"
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "line",
+        "point": true,
+        "color": "#c0392b"
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "quantitative",
+          "axis": {
+            "format": "d",
+            "title": "Year"
+          },
+          "scale": {
+            "domain": [
+              2000,
+              2025
+            ],
+            "nice": false
+          }
+        },
+        "y": {
+          "field": "temp_anomaly_c",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              1.5
+            ]
+          },
+          "axis": {
+            "title": "Anomaly (°C vs 1951-1980)"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "year",
+            "title": "Year"
+          },
+          {
+            "field": "temp_anomaly_c",
+            "title": "Anomaly °C"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "line",
+        "strokeDash": [
+          6,
+          4
+        ],
+        "color": "#555"
+      },
+      "transform": [
+        {
+          "regression": "temp_anomaly_c",
+          "on": "year"
+        }
+      ],
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "temp_anomaly_c",
+          "type": "quantitative"
+        }
+      }
+    }
+  ]
+}

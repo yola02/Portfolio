@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Same Data, Opposite Conclusions: Global Temperature | Yola Charara</title>
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet" />
+    <link href="templatemo_531_reflux/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+      body { font-family: "Lato", sans-serif; color: #2b2b2b; background: #ffffff; line-height: 1.7; }
+      .project-page { max-width: 1000px; margin: 0 auto; padding: 48px 20px 80px; }
+      .back-link { display: inline-block; margin-bottom: 28px; color: #555; text-decoration: none; font-weight: 700; }
+      .back-link:hover { color: #000; }
+      h1 { font-weight: 900; font-size: 34px; margin-bottom: 8px; }
+      h2 { font-weight: 700; font-size: 24px; margin: 48px 0 6px; }
+      .intro { color: #555; font-size: 18px; margin-bottom: 8px; }
+      .chart-box { margin: 20px 0 22px; border: 1px solid #e3e0d8; background: #fbfaf7; padding: 10px; overflow-x: auto; }
+      .caption { font-size: 15px; color: #444; margin-top: -10px; margin-bottom: 18px; }
+      .tag { display: inline-block; font-weight: 700; font-size: 14px; padding: 3px 10px; border-radius: 3px; margin: 4px 0 0; }
+      .tag-ok { background: #e8f4ee; color: #1b6b4a; }
+      .tag-bad { background: #fdecea; color: #b3261e; }
+      .sources { font-size: 15px; color: #555; margin-top: 40px; border-top: 1px solid #e3e0d8; padding-top: 18px; }
+      .sources a { color: #2b2b2b; text-decoration: underline; }
+    </style>
+  </head>
+
+  <body>
+    <div class="project-page">
+      <a class="back-link" href="index.html">&larr; Back to portfolio</a>
+
+      <h1>Same Data, Opposite Conclusions: Global Temperature</h1>
+      <p class="intro">
+        Two figures built from the same column of data, one honest and one intentionally misleading,
+        made with Vega-Lite.
+      </p>
+
+      <h2>Figure 1: Honest Version</h2>
+      <span class="tag tag-ok">Not misleading</span>
+      <div class="chart-box">
+        <div id="chartA">Loading chart...</div>
+      </div>
+      <p class="caption">
+        Figure 1. Yearly average global temperature anomaly, 2000 to 2025, compared with the 1951-1980 baseline. Hover over a point to see exact values.
+      </p>
+      <p>
+        For the honest version, I plotted the global temperature anomaly, which is how far each year's average temperature is from the 1951-1980 average. The dataset has monthly values, so I averaged the 12 months of each year into one yearly value. The chart covers the full period from 2000 to 2025. I left out 2026 because the file only has January to April, and a partial year would not be comparable with full years. The y-axis starts at 0 and is labeled in degrees Celsius against the baseline, and a dashed line shows the overall linear trend so the direction is clear even though individual years go up and down. The chart shows that temperatures climbed from about 0.45 &deg;C in 2000 to about 1.25 &deg;C in 2025, with 2024 the highest year at about 1.31 &deg;C.
+      </p>
+
+      <h2>Figure 2: Intentionally Misleading Version</h2>
+      <span class="tag tag-bad">Intentionally misleading</span>
+      <div class="chart-box">
+        <div id="chartB">Loading chart...</div>
+      </div>
+      <p class="caption">
+        Figure 2. The same yearly values as Figure 1, shown for the same period, 2000 to 2025, but on a y-axis from -10 to 10 &deg;C. Every point is correct, but the conclusion in the title is not supported by the full data.
+      </p>
+      <p>
+        For the misleading version, I used exactly the same yearly values and the same 2000-2025 period, and changed only one thing: the y-axis. I stretched it from -10 to 10 &deg;C, a range far wider than the data, which only moves between about 0.45 and 1.31 &deg;C. On that scale a rise of less than one degree is squeezed into an almost flat line, so the chart looks like warming has stopped. Then I wrote a title, &ldquo;Global warming has stalled,&rdquo; that the shape of the line appears to support. No data point is wrong, and every value is plotted correctly, but the conclusion is false. I labeled this figure as misleading so it is not mistaken for a real claim.</p>
+
+      <h2>How Easy Is It to Mislead with a Chart?</h2>
+      <p>
+        I think it is very easy to mislead people with a data visualization, and a chart can completely change the message being sent. In this project it took only one choice, a much wider y-axis, to turn a clear rise in temperature into an almost flat line, even though both charts show the same years, and I did not have to change a single number. Another common trick, which I did not use here, is to show only a short stretch of the data, such as 2003-2013, where the line happens to be flat. A chart also looks objective, so people tend to trust it, and they often read only the title and the shape of the line without checking the details. Because the underlying data is correct, a misleading chart is hard to catch as an error. It is a matter of what was left out and how it was framed.
+      </p>
+      <p>
+        To avoid being misled, readers should check a few things before trusting a chart. They should look at the axis, including where it starts, how far it extends and whether the scale fits the data. They should ask why the chart starts and ends at those particular dates and whether a longer time span would tell a different story. They should check the units and baseline, and ask whether the title claims more than the chart can support. They should also look for the source of the data and consider who made the chart and what they wanted people to conclude. When a claim matters, it is worth looking at the original data or a second source instead of relying on one chart.
+      </p>
+
+      <p class="sources">
+        Data: temperature_anomaly_monthly.csv from the Kaggle dataset
+        <a href="https://www.kaggle.com/datasets/sergionefedov/global-climate-and-energy-transition-2000-2026" target="_blank" rel="noopener">Global Climate &amp; Energy Transition 2000-2026</a>.
+        Region: Global; monthly values averaged by year; baseline 1951-1980.
+        <a href="temp_global_yearly.csv">Download the dataset</a> |
+        <a href="temp_a_honest.vl.json">Figure 1 specification</a> |
+        <a href="temp_b_misleading.vl.json">Figure 2 specification</a>
+      </p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+    <script>
+      var CSV_URL = "https://raw.githubusercontent.com/yola02/Portfolio/refs/heads/main/temp_global_yearly.csv";
+
+      function load(specFile, target) {
+        fetch(specFile)
+          .then(function (r) { return r.json(); })
+          .then(function (spec) {
+            spec.data = { url: CSV_URL };
+            return vegaEmbed(target, spec, { actions: false });
+          })
+          .catch(function () {
+            document.querySelector(target).innerHTML =
+              "The chart could not load. Please check that " + specFile + " and the CSV are uploaded.";
+          });
+      }
+      load("temp_a_honest.vl.json", "#chartA");
+      load("temp_b_misleading.vl.json", "#chartB");
+    </script>
+  </body>
+</html>

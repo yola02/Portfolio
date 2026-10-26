@@ -1,0 +1,58 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {
+    "url": "temp_global_yearly.csv"
+  },
+  "width": "container",
+  "height": 160,
+  "title": {
+    "text": "Global warming has stalled",
+    "subtitle": "Yearly average anomaly, 2000-2025",
+    "anchor": "start"
+  },
+  "mark": {
+    "type": "line",
+    "point": true,
+    "color": "#2a6f97"
+  },
+  "encoding": {
+    "x": {
+      "field": "year",
+      "type": "quantitative",
+      "axis": {
+        "format": "d",
+        "title": "Year"
+      },
+      "scale": {
+        "domain": [
+          2000,
+          2025
+        ],
+        "nice": false
+      }
+    },
+    "y": {
+      "field": "temp_anomaly_c",
+      "type": "quantitative",
+      "scale": {
+        "domain": [
+          -10,
+          10
+        ]
+      },
+      "axis": {
+        "title": "Anomaly (°C)"
+      }
+    },
+    "tooltip": [
+      {
+        "field": "year",
+        "title": "Year"
+      },
+      {
+        "field": "temp_anomaly_c",
+        "title": "Anomaly °C"
+      }
+    ]
+  }
+}
