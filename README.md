@@ -24,6 +24,13 @@ A before and after study of a Sankey infographic on government debt. The origina
 - **Dataset:** [IMF World Economic Outlook, April 2026](https://data.imf.org/en/datasets/IMF.RES:WEO)
 - **View it live:** [government-debt.html](https://yola02.github.io/Portfolio/government-debt.html)
 
+### Same Data, Opposite Conclusions: Global Temperature
+Two line charts built from the same yearly global temperature data (2000-2025), one honest and one intentionally misleading. Only the y-axis changes: a zero-based axis with a trend line shows a clear rise, while a very wide axis makes the same data look like warming has stalled. The page explains how each chart was made and how readers can avoid being misled.
+
+- **Tools:** Vega-Lite, Python, pandas
+- **Dataset:** [Global Climate & Energy Transition 2000-2026 (Kaggle)](https://www.kaggle.com/datasets/sergionefedov/global-climate-and-energy-transition-2000-2026)
+- **View it live:** [climate-temperature.html](https://yola02.github.io/Portfolio/climate-temperature.html)
+
 More projects will be added here as they're completed.
 
 ## Built With
@@ -38,3 +45,5 @@ More projects will be added here as they're completed.
 Landing page adapted from the [Reflux](https://templatemo.com/tm-531-reflux) template by [TemplateMo](https://templatemo.com).
 
 Original government debt infographic by Visual Capitalist.
+
+Global temperature data from the Kaggle dataset *Global Climate & Energy Transition 2000-2026* by sergionefedov.
