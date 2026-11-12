@@ -31,12 +31,20 @@ Two line charts built from the same yearly global temperature data (2000-2025), 
 - **Dataset:** [Global Climate & Energy Transition 2000-2026 (Kaggle)](https://www.kaggle.com/datasets/sergionefedov/global-climate-and-energy-transition-2000-2026)
 - **View it live:** [climate-temperature.html](https://yola02.github.io/Portfolio/climate-temperature.html)
 
+### Tutorial: Animating Global Earthquakes with Kepler.gl
+A step-by-step, no-code tutorial for building an animated geospatial map in Kepler.gl. It walks through loading a CSV, animating 11,808 earthquakes through time, styling the points by magnitude, choosing a base map, and saving and exporting the result. Includes screenshots of every step, tips for problems I ran into, what the official docs got wrong, and when to use Kepler.gl compared to other tools.
+
+- **Tools:** Kepler.gl
+- **Dataset:** [Global Earthquakes 2020-2026 (Kaggle)](https://www.kaggle.com/datasets/zaneneave/global-earthquakes-2020-2026)
+- **View it live:** [kepler-gl-tutorial.html](https://yola02.github.io/Portfolio/kepler-gl-tutorial.html)
+
 More projects will be added here as they're completed.
 
 ## Built With
 
 - HTML / CSS / JavaScript
 - [Vega-Lite](https://vega.github.io/vega-lite/) / [vega-embed](https://github.com/vega/vega-embed)
+- [Kepler.gl](https://kepler.gl)
 - Python, pandas, Altair
 - Hosted on GitHub Pages
 
@@ -47,3 +55,5 @@ Landing page adapted from the [Reflux](https://templatemo.com/tm-531-reflux) tem
 Original government debt infographic by Visual Capitalist.
 
 Global temperature data from the Kaggle dataset *Global Climate & Energy Transition 2000-2026* by sergionefedov.
+
+Earthquake data from the Kaggle dataset *Global Earthquakes 2020-2026* by zaneneave.
