@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kepler.gl Tutorial: Mapping Global Earthquakes Over Time | Yola Charara</title>
+  <meta name="description" content="A step-by-step, no-code tutorial for building an animated geospatial map of 11,808 global earthquakes (2020-2026) in Kepler.gl, with screenshots, tips, and what the official docs got wrong.">
+  <meta property="og:title" content="Mapping Global Earthquakes Over Time with Kepler.gl">
+  <meta property="og:description" content="A beginner-friendly, no-code Kepler.gl tutorial with screenshots of every step.">
+  <meta property="og:image" content="kepler-gl-tutorial/images/00-hero.jpg">
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet">
+  <style>
+    :root{--ink:#1f2933;--muted:#5f6b7a;--bg:#f6f7f9;--card:#fff;--line:#e3e7ec;--accent:#d9480f;--accent-dark:#a8360a;--dark:#14181f;--code:#eef1f5}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;scroll-padding-top:72px}
+    body{margin:0;font-family:'Lato',-apple-system,'Segoe UI',Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.7;font-size:17px}
+    a{color:var(--accent-dark)}
+    a:hover{color:var(--accent)}
+    .topbar{position:sticky;top:0;z-index:20;background:var(--dark);color:#fff;display:flex;justify-content:space-between;align-items:center;padding:12px 24px}
+    .topbar a{color:#fff;text-decoration:none;font-weight:700;font-size:15px}
+    .topbar a:hover{color:#ffb089}
+    .topbar .brand{font-weight:900;letter-spacing:.3px}
+    header.hero{background:var(--dark);color:#fff;text-align:center;padding:56px 20px 0}
+    header.hero .eyebrow{text-transform:uppercase;letter-spacing:2px;font-size:13px;color:#ffb089;font-weight:700}
+    header.hero h1{font-size:clamp(28px,5vw,46px);line-height:1.15;margin:10px auto 14px;max-width:860px;font-weight:900}
+    header.hero p.tag{max-width:680px;margin:0 auto 32px;color:#cbd2da;font-size:19px;font-weight:300}
+    header.hero figure{margin:0 auto;max-width:1000px;background:none;border:0;padding:0;box-shadow:none}
+    header.hero img{width:100%;display:block;border-radius:10px 10px 0 0;box-shadow:0 -4px 40px rgba(0,0,0,.4)}
+    header.hero figcaption{background:#0d1015;color:#aab3be;font-size:14px;padding:12px 18px;border-radius:0 0 10px 10px}
+    main{max-width:860px;margin:0 auto;padding:40px 20px 80px}
+    h2{font-size:30px;margin:56px 0 14px;font-weight:900;line-height:1.25}
+    h2.part{background:var(--dark);color:#fff;padding:18px 24px;border-radius:10px;font-size:26px;margin:72px 0 8px;border-left:8px solid var(--accent)}
+    h3.step{font-size:23px;margin:44px 0 10px;font-weight:700;padding-top:6px;border-top:1px solid var(--line)}
+    h2#contents{margin-top:36px}
+    p,li{margin:0 0 14px}
+    ul,ol{padding-left:24px}
+    figure{margin:22px 0;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:0 2px 10px rgba(20,24,31,.06)}
+    figure img{width:100%;height:auto;display:block;border-radius:6px;cursor:zoom-in}
+    figcaption{font-size:14px;color:var(--muted);padding:8px 4px 2px;line-height:1.45}
+    img.inline-icon{vertical-align:middle;border-radius:4px}
+    blockquote{margin:22px 0;padding:14px 20px;background:#fff6f0;border-left:5px solid var(--accent);border-radius:0 8px 8px 0}
+    blockquote p{margin:0 0 8px}
+    blockquote p:last-child{margin:0}
+    table{border-collapse:collapse;width:100%;margin:20px 0;background:var(--card);border:1px solid var(--line);border-radius:8px;overflow:hidden;font-size:16px}
+    th,td{padding:10px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+    thead th{background:#eef1f5}
+    tbody tr:last-child td{border-bottom:0}
+    code{background:var(--code);padding:2px 6px;border-radius:4px;font-size:.92em}
+    hr{border:0;border-top:1px solid var(--line);margin:36px 0}
+    .table-scroll{overflow-x:auto}
+    footer{text-align:center;padding:30px 20px 50px;color:var(--muted);font-size:14px;border-top:1px solid var(--line)}
+    .btn{display:inline-block;background:var(--accent);color:#fff!important;text-decoration:none;padding:10px 22px;border-radius:6px;font-weight:700;margin-bottom:14px}
+    .btn:hover{background:var(--accent-dark)}
+    #lb{position:fixed;inset:0;background:rgba(10,12,16,.92);display:none;align-items:center;justify-content:center;z-index:50;cursor:zoom-out;padding:20px}
+    #lb img{max-width:100%;max-height:100%;border-radius:6px}
+    #lb.open{display:flex}
+    @media(max-width:600px){body{font-size:16px}h2{font-size:25px}h3.step{font-size:20px}.topbar{padding:10px 14px}}
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="brand" href="index.html">Yola Charara</a>
+    <a href="index.html#section5">&larr; Back to portfolio</a>
+  </div>
+
+  <header class="hero">
+    <div class="eyebrow">Tutorial &middot; Data Visualization</div>
+    <h1>Mapping Global Earthquakes Over Time with Kepler.gl</h1>
+    <p class="tag">A beginner-friendly, no-code tutorial: load a CSV, animate it through time, style it, and save the map.</p>
+    <figure>
+      <img src="kepler-gl-tutorial/images/00-hero.jpg" alt="Final Kepler.gl map of global earthquakes from 2020 to 2026, colored by magnitude on a satellite base map, with a time playback bar and legend">
+      <figcaption>The finished map: 11,808 earthquakes (2020–2026), colored by magnitude, on a satellite base map. The points trace the Pacific "Ring of Fire" and the mid-ocean ridges.</figcaption>
+    </figure>
+  </header>
+
+  <main>
+<div class="table-scroll"><table>
+<tbody>
+<tr class="odd">
+<td><strong>Tool</strong></td>
+<td><a href="https://kepler.gl" target="_blank" rel="noopener">Kepler.gl</a> (free, open source, runs in your browser, <strong>no account needed</strong>)</td>
+</tr>
+<tr class="even">
+<td><strong>Dataset</strong></td>
+<td><a href="https://www.kaggle.com/datasets/zaneneave/global-earthquakes-2020-2026" target="_blank" rel="noopener">Global Earthquakes 2020-2026</a> on Kaggle, 11,808 rows</td>
+</tr>
+<tr class="odd">
+<td><strong>You will make</strong></td>
+<td>An interactive map with a time slider, custom colors, a legend, a search box, and a saved copy</td>
+</tr>
+<tr class="even">
+<td><strong>Tested</strong></td>
+<td>November 2026 in Chrome, Kepler.gl version 3.3.0-alpha.20 (shown at the top left of every screenshot)</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p><strong>Already seen another Kepler.gl tutorial?</strong> The closest existing one I found is <a href="https://itnext.io/using-kepler-gl-to-visualise-over-35-000-earthquakes-near-christchurch-new-zealand-d207a760e000" target="_blank" rel="noopener">Using Kepler GL to Visualise over 35,000 Earthquakes near Christchurch, New Zealand</a>, which maps a single region. <strong>This tutorial adds:</strong> a worldwide dataset from a different source and time span, the fix for time playback that would not start (see <a href="#step-5-add-a-time-filter-and-link-it-to-the-layer-timeline">Step 5</a>), a side-by-side look at the three playback modes, and the full path through base maps, saving and exporting.</p>
+</blockquote>
+<hr />
+<h2 id="contents">Contents</h2>
+<ol type="1">
+<li><a href="#before-you-start">Before you start</a></li>
+<li><strong>Part 1: Load your data</strong> (Steps 1–4)</li>
+<li><strong>Part 2: Animate over time</strong> (Steps 5–6)</li>
+<li><strong>Part 3: Style the map</strong> (Steps 7–11)</li>
+<li><strong>Part 4: Save and share</strong> (Steps 12–13)</li>
+<li><a href="#important-tips">Important tips</a></li>
+<li><a href="#what-the-docs-got-wrong">What the docs got wrong</a></li>
+<li><a href="#when-to-use-keplergl">When to use Kepler.gl</a></li>
+<li><a href="#resources">Resources</a></li>
+</ol>
+<hr />
+<h2 id="before-you-start">Before you start</h2>
+<p>You need:</p>
+<ul>
+<li>A modern web browser (I used Chrome).</li>
+<li>A <strong>CSV file with a latitude column, a longitude column, and (for animation) a timestamp column.</strong> Kepler.gl detects these automatically.</li>
+<li>Optional: a Google Drive, Dropbox, or CARTO account, only if you want to save the map to the cloud in Step 12.</li>
+</ul>
+<p>My file has these columns (among others): <code>id</code>, <code>time</code>, <code>year</code>, <code>decade</code>, <code>latitude</code>, <code>longitude</code>, <code>depth</code>, <code>mag</code>, <code>magType</code>, <code>place</code>. You can use your own data in every step below.</p>
+<hr />
+<h2 class="part" id="part-1-load-your-data">Part 1: Load your data</h2>
+<h3 class="step" id="step-1-open-keplergl">Step 1: Open Kepler.gl</h3>
+<p>Go to <a href="https://kepler.gl" target="_blank" rel="noopener">kepler.gl</a> and click <strong>Get Started</strong>. No sign-up is required.</p>
+<figure><img loading="lazy" src="kepler-gl-tutorial/images/01-landing-get-started.jpg" alt="Kepler.gl home page with the Get Started button circled"><figcaption>Kepler.gl home page with the Get Started button circled</figcaption></figure>
+<h3 class="step" id="step-2-optional-explore-with-sample-data">Step 2 (optional): Explore with sample data</h3>
+<p>If you do not have a dataset yet, the <strong>Add Data To Map</strong> window has a <strong>Try sample data</strong> button in the top right. It offers ready-made datasets such as California Earthquakes and NYC Taxi Trips, which is a good way to get a feel for the tool.</p>
+<figure><img loading="lazy" src="kepler-gl-tutorial/images/02-try-sample-data.jpg" alt="Add Data To Map window with Try sample data circled"><figcaption>Add Data To Map window with Try sample data circled</figcaption></figure>
+<figure><img loading="lazy" src="kepler-gl-tutorial/images/03-sample-datasets.jpg" alt="List of Kepler.gl sample datasets"><figcaption>List of Kepler.gl sample datasets</figcaption></figure>
+<h3 class="step" id="step-3-load-your-own-csv">Step 3: Load your own CSV</h3>
+<p>I downloaded <strong>Global Earthquakes 2020-2026</strong> from <a href="https://www.kaggle.com/datasets/zaneneave/global-earthquakes-2020-2026" target="_blank" rel="noopener">Kaggle</a>.</p>
+<ol type="1">
+<li>In <strong>Add Data To Map</strong>, stay on the <strong>Load Files</strong> tab.</li>
+<li>Click <strong>browse your files</strong> and select your CSV.</li>
+<li>When the file appears under <em>To add to map</em>, click <strong>Add Data</strong>.</li>
+</ol>
+<figure><img loading="lazy" src="kepler-gl-tutorial/images/04-browse-files.jpg" alt="Load Files tab with the browse your files link circled and the file picker open"><figcaption>Load Files tab with the browse your files link circled and the file picker open</figcaption></figure>
+<figure><img loading="lazy" src="kepler-gl-tutorial/images/05-add-data.jpg" alt="CSV listed as ready to add, with the Add Data button circled"><figcaption>CSV listed as ready to add, with the Add Data button circled</figcaption></figure>
+<blockquote>
+<p>Kepler.gl says it is "a client-side application with no backend", so your file stays in your browser and is not uploaded to a server.</p>
+</blockquote>
+<h3 class="step" id="step-4-explore-your-data-table">Step 4: Explore your data table</h3>
+<p>Kepler.gl builds a map layer for you automatically. Before styling anything, click the <strong>table icon</strong> next to your dataset name to see every column, its detected type (<code>string</code>, <code>time</code>, <code>int</code>, <code>float</code>), and quick statistics such as min, max, and a histogram.</p>
+<figure><img loading="lazy" src="kepler-gl-tutorial/images/06-open-data-table.jpg" alt="Dataset name in the left panel with the table icon circled"><figcaption>Dataset name in the left panel with the table icon circled</figcaption></figure>
+<figure><img loading="lazy" src="kepler-gl-tutorial/images/07-data-table.jpg" alt="Data table view showing column types, histograms, and sample rows for 11,808 rows"><figcaption>Data table view showing column types, histograms, and sample rows for 11,808 rows</figcaption></figure>
+<p><strong>Why this matters:</strong> you will pick columns for color and time in the next steps, and the types tell you what Kepler.gl will offer. In my file, <code>time</code> was detected as a <code>time</code> column, which is what the filter in Step 5 uses.</p>
+<hr />
+<h2 class="part" id="part-2-animate-over-time">Part 2: Animate over time</h2>
+<h3 class="step" id="step-5-add-a-time-filter-and-link-it-to-the-layer-timeline">Step 5: Add a time filter and link it to the layer timeline</h3>
+<ol type="1">
+<li>Click the <strong>funnel icon</strong> (Filters) in the top-left panel, then <strong>Add Filter</strong>.</li>
+<li>Open the field dropdown and choose your timestamp column (<code>time</code> for me).</li>
+<li>Under the new filter, click <strong>Link with the layer timeline</strong>.</li>
+</ol>
+<figure><img loading="lazy" src="kepler-gl-tutorial/images/08-add-filter.jpg" alt="Filters panel with the funnel icon and Add Filter button circled"><figcaption>Filters panel with the funnel icon and Add Filter button circled</figcaption></figure>
+<figure><img loading="lazy" src="kepler-gl-tutorial/images/09-choose-time-field.jpg" alt="Field dropdown with the time column circled"><figcaption>Field dropdown with the time column circled</figcaption></figure>
+<figure><img loading="lazy" src="kepler-gl-tutorial/images/10-link-layer-timeline.jpg" alt="Link with the layer timeline circled under the filter, with the timeline histogram showing at the bottom"><figcaption>Link with the layer timeline circled under the filter, with the timeline histogram showing at the bottom</figcaption></figure>
+<p>Now click the time-window icon <img class="inline-icon" src="kepler-gl-tutorial/images/icon-time-window.png" alt="time window icon" height="20"> at the bottom right of the timeline, next to the timestamp. The playback controls appear.</p>
+<blockquote>
+<p><strong>If Play does nothing:</strong> this is the step the official docs skip. See <a href="#what-the-docs-got-wrong">What the docs got wrong</a>.</p>
+</blockquote>
+<h3 class="step" id="step-6-choose-a-playback-mode">Step 6: Choose a playback mode</h3>
+<p>The bar chart in the timeline shows the <strong>count of rows per month</strong>, so you can spot busy periods before you press play. Three icons at the bottom right control how time moves:</p>
+<div class="table-scroll"><table>
+<thead>
+<tr class="header">
+<th>Icon (left to right)</th>
+<th>Mode</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1st</td>
+<td><strong>Moving time window</strong></td>
+<td>Shows a window of time sliding from 2020 to 2026, then runs back from 2026 to 2020.</td>
+</tr>
+<tr class="even">
+<td>2nd</td>
+<td><strong>Incremental time window</strong></td>
+<td>Plays from 2020 to 2026 and keeps adding points as time advances. <strong>This is the one I chose</strong>, because it shows how the whole map fills in.</td>
+</tr>
+<tr class="odd">
+<td>3rd</td>
+<td><strong>Step by interval</strong></td>
+<td>Jumps between intervals instead of playing continuously.</td>
+</tr>
+</tbody>
+</table></div>
+<figure><img loading="lazy" src="kepler-gl-tutorial/images/11-playback-controls.jpg" alt="Timeline with the three playback-mode icons circled"><figcaption>Timeline with the three playback-mode icons circled</figcaption></figure>
+<hr />
+<h2 class="part" id="part-3-style-the-map">Part 3: Style the map</h2>
+<h3 class="step" id="step-7-choose-the-point-shape-and-color-column">Step 7: Choose the point shape and color column</h3>
+<p>Go back to the <strong>layers icon</strong> (top left) and expand your dataset's layer.</p>
+<ol type="1">
+<li>Under <strong>Basic</strong>, pick the layer type. I kept <strong>Point</strong> because it fits location data like earthquakes best. The menu also offers Arc, Line, Grid, Hexbin, Polygon, Cluster, and more.</li>
+<li>Under <strong>Fill Color → Color Based On</strong>, choose the column that should control color.</li>
+</ol>
+<figure><img loading="lazy" src="kepler-gl-tutorial/images/12-layer-type.jpg" alt="Layer type dropdown showing Point, Arc, Line, Grid, Hexbin, Polygon, Cluster, and more"><figcaption>Layer type dropdown showing Point, Arc, Line, Grid, Hexbin, Polygon, Cluster, and more</figcaption></figure>
+<figure><img loading="lazy" src="kepler-gl-tutorial/images/13-fill-color-mag.jpg" alt="Color Based On dropdown with the mag column selected"><figcaption>Color Based On dropdown with the mag column selected</figcaption></figure>
+<blockquote>
+<p><strong>Choose a column that answers your question.</strong> I colored by <code>mag</code> (earthquake magnitude), so the legend shows how strong each quake was. Kepler.gl may pre-select a different column (for me it was <code>dmin</code>, a measurement-quality field that says nothing about strength), so always check what the legend is actually telling your viewer.</p>
+</blockquote>
+<h3 class="step" id="step-8-set-the-color-scale-opacity-radius-and-labels">Step 8: Set the color scale, opacity, radius, and labels</h3>
+<ul>
+<li><strong>Color scale:</strong> choose a palette and a scale type. I used <strong>Quantile</strong>, which puts roughly the same number of points in each color bin. That is why my legend bins are narrow at the low end: most quakes in this dataset are below magnitude 5.6, and the strongest ones share the last bin.</li>
+<li><strong>Opacity:</strong> raise it for brighter, more solid colors (I used 0.8).</li>
+<li><strong>Radius:</strong> change it so points are visible without hiding each other (I started at 11).</li>
+<li><strong>Label (optional):</strong> lets you pick a column to print next to each point. I left it empty, because with 11,808 points the text would overcrowd the map. It is useful for smaller datasets.</li>
+</ul>
+<figure><img loading="lazy" src="kepler-gl-tutorial/images/14-color-scale.jpg" alt="Color palette dropdown with the mag field, Quantile scale, and 6-step palette list"><figcaption>Color palette dropdown with the mag field, Quantile scale, and 6-step palette list</figcaption></figure>
+<figure><img loading="lazy" src="kepler-gl-tutorial/images/15-opacity-radius.jpg" alt="Opacity and Radius values highlighted in the layer panel"><figcaption>Opacity and Radius values highlighted in the layer panel</figcaption></figure>
+<figure><img loading="lazy" src="kepler-gl-tutorial/images/16-label-field.jpg" alt="Label dropdown listing the dataset&#39;s columns, left unselected"><figcaption>Label dropdown listing the dataset&#39;s columns, left unselected</figcaption></figure>
+<h3 class="step" id="step-9-add-a-legend-and-a-location-search">Step 9: Add a legend and a location search</h3>
+<p>Click the <strong>Interactions icon</strong> in the top-left panel. Each control has a toggle. I turned on:</p>
+<ul>
+<li><strong>Legend</strong>: explains what the colors mean (bottom right of the map).</li>
+<li><strong>Geocoder</strong>: a search box at the top right where you can type an address or coordinates and jump there.</li>
+</ul>
+<figure><img loading="lazy" src="kepler-gl-tutorial/images/17-interactions.jpg" alt="Interactions panel with the Legend and Geocoder toggles, and arrows pointing to the magnitude legend and the search box on the map"><figcaption>Interactions panel with the Legend and Geocoder toggles, and arrows pointing to the magnitude legend and the search box on the map</figcaption></figure>
+<h3 class="step" id="step-10-pick-a-base-map">Step 10: Pick a base map</h3>
+<p>Click the <strong>Base map icon</strong> (far right in the top-left panel) and choose a style. I chose <strong>Satellite With Streets</strong>. You can also toggle individual map layers (labels, roads, buildings, water, land) below the style list.</p>
+<figure><img loading="lazy" src="kepler-gl-tutorial/images/18-base-map.jpg" alt="Base map icon circled, with Satellite With Streets selected in the style list and the map updated behind it"><figcaption>Base map icon circled, with Satellite With Streets selected in the style list and the map updated behind it</figcaption></figure>
+<h3 class="step" id="step-11-re-tune-your-colors-for-the-new-base-map">Step 11: Re-tune your colors for the new base map</h3>
+<p>A palette that looks great on a dark map can disappear on a satellite image. I went back to the <strong>layers icon</strong> and:</p>
+<ul>
+<li>switched to a light-yellow-to-dark-red palette so points stand out against green and brown land,</li>
+<li>increased the <strong>radius</strong> from 11 to 15.3.</li>
+</ul>
+<figure><img loading="lazy" src="kepler-gl-tutorial/images/19-recolored-final.jpg" alt="Layer panel with the new palette and radius circled, and the recolored satellite map with its magnitude legend"><figcaption>Layer panel with the new palette and radius circled, and the recolored satellite map with its magnitude legend</figcaption></figure>
+<hr />
+<h2 class="part" id="part-4-save-and-share">Part 4: Save and share</h2>
+<h3 class="step" id="step-12-save-or-export-your-map">Step 12: Save or export your map</h3>
+<p>You have two options in the top-left panel:</p>
+<ul>
+<li><strong>Cloud icon (Save Map):</strong> saves the map to your own cloud storage. The options are Foursquare, Dropbox, Google Drive, and CARTO.</li>
+<li><strong>Share/download icon:</strong> opens an export menu with <strong>Export Image</strong>, <strong>Export Video</strong>, <strong>Export Data</strong>, <strong>Export Map</strong>, and <strong>Share Map URL</strong>.</li>
+</ul>
+<figure><img loading="lazy" src="kepler-gl-tutorial/images/20-save-map-dialog.jpg" alt="Save Map dialog listing Foursquare, Dropbox, Google Drive, and CARTO"><figcaption>Save Map dialog listing Foursquare, Dropbox, Google Drive, and CARTO</figcaption></figure>
+<figure><img loading="lazy" src="kepler-gl-tutorial/images/21-export-menu.jpg" alt="Export menu with Export Image, Export Video, Export Data, Export Map, and Share Map URL"><figcaption>Export menu with Export Image, Export Video, Export Data, Export Map, and Share Map URL</figcaption></figure>
+<h3 class="step" id="step-13-reopen-your-saved-map-later">Step 13: Reopen your saved map later</h3>
+<p>I saved to <strong>Google Drive</strong>. Kepler.gl creates a <code>.json</code> file in a <code>Kepler.gl</code> folder there. To continue editing later, download that file and load it through <strong>Add Data To Map → Load Files</strong>, exactly as in Step 3.</p>
+<figure><img loading="lazy" src="kepler-gl-tutorial/images/22-saved-in-drive.jpg" alt="Google Drive showing the saved Global Earthquake 2020-2026 JSON file in a Kepler.gl folder"><figcaption>Google Drive showing the saved Global Earthquake 2020-2026 JSON file in a Kepler.gl folder</figcaption></figure>
+<hr />
+<h2 id="important-tips">Important tips</h2>
+<ul>
+<li><strong>Play button does nothing.</strong> Add a time filter, then click <strong>Link with the layer timeline</strong> (Step 5).</li>
+<li><strong>Nothing is stored on a server.</strong> Because Kepler.gl runs entirely in your browser, save your map (Step 12) before closing the tab.</li>
+<li><strong>A second layer appeared.</strong> After linking the timeline, a second layer named <code>point</code> (type <em>Trip</em>) showed up in the Layers panel. I left it alone and did all my styling on the first layer, which is named after the dataset.</li>
+<li><strong>Colors vanished after changing the base map.</strong> Dark palettes can disappear on a satellite background. Change the palette and raise the radius (Step 11).</li>
+<li><strong>Pop-up banner in the corner.</strong> The "Kepler.gl 3.1 + DuckDB is here!" notice is just an announcement. Close it with the <strong>X</strong>.</li>
+</ul>
+<h2 id="what-the-docs-got-wrong">What the docs got wrong</h2>
+<p><strong>The official <a href="https://docs.kepler.gl/docs/user-guides/h-playback" target="_blank" rel="noopener">Time Playback guide</a> says:</strong> add a filter on a time field, the playback window appears, and then press play.</p>
+<p><strong>What actually happened:</strong> after adding the filter on <code>time</code>, pressing play did not animate the map. It worked only after I clicked <strong>Link with the layer timeline</strong> under the filter, a step the guide never mentions. The Christchurch earthquake tutorial linked above also stops at adding the filter. After I linked the timeline, playback ran correctly.</p>
+<h2 id="when-to-use-keplergl">When to use Kepler.gl</h2>
+<p><strong>Use it when you:</strong></p>
+<ul>
+<li>have <strong>location data</strong> (lat/long) and want a striking map in minutes with <strong>no code</strong>,</li>
+<li>want to <strong>animate points through time</strong>, which took me a few clicks,</li>
+<li>have a point dataset of a few thousand rows or more (mine was 11,808) and want to explore it directly in the browser,</li>
+<li>want to keep your data private, since it never leaves your browser.</li>
+</ul>
+<p><strong>Use something else when you:</strong></p>
+<ul>
+<li>need <strong>charts that are not maps</strong> (bar charts, scatterplots, and so on). Tableau, which we used in class, is far more flexible.</li>
+<li>need <strong>calculated fields, dashboards with linked charts, or precise annotations and titles</strong>. Tableau handles these better.</li>
+<li>need a fully <strong>reproducible, code-based workflow</strong>. A scripted approach in Python or a JavaScript library is easier to version-control than clicking through panels.</li>
+</ul>
+<p><strong>Compared with Tableau:</strong> Kepler.gl was faster to a good-looking animated map and needed no account, but it is built for maps only. Tableau is the better choice once the story needs more than a map.</p>
+<h2 id="resources">Resources</h2>
+<ul>
+<li><a href="https://docs.kepler.gl/docs/user-guides" target="_blank" rel="noopener">Kepler.gl official user guide</a></li>
+<li><a href="https://docs.kepler.gl/docs/user-guides/h-playback" target="_blank" rel="noopener">Kepler.gl Time Playback guide</a></li>
+<li><a href="https://www.kaggle.com/datasets/zaneneave/global-earthquakes-2020-2026" target="_blank" rel="noopener">Global Earthquakes 2020-2026 dataset (Kaggle)</a></li>
+<li><a href="https://itnext.io/using-kepler-gl-to-visualise-over-35-000-earthquakes-near-christchurch-new-zealand-d207a760e000" target="_blank" rel="noopener">Existing tutorial: Visualising earthquakes near Christchurch with Kepler GL</a></li>
+</ul>
+<hr />
+<p><em>All screenshots in this tutorial are from my own work.</em></p>
+
+  </main>
+
+  <footer>&copy; Yola Charara &middot; Graduate Data Scientist, University of Michigan-Flint</footer>
+
+  <div id="lb" aria-hidden="true"><img alt=""></div>
+  <script>
+    (function(){
+      var lb=document.getElementById('lb'),big=lb.querySelector('img');
+      document.querySelectorAll('figure img').forEach(function(i){
+        i.addEventListener('click',function(){big.src=i.src;big.alt=i.alt;lb.classList.add('open');});
+      });
+      lb.addEventListener('click',function(){lb.classList.remove('open');});
+      document.addEventListener('keydown',function(e){if(e.key==='Escape')lb.classList.remove('open');});
+    })();
+  </script>
+</body>
+</html>
