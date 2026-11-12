@@ -196,6 +196,20 @@ https://templatemo.com/tm-531-reflux
                 </div>
               </div>
             </div>
+            <div class="col-md-12">
+              <div class="service-item">
+                <h4>Tutorial: Animating Global Earthquakes with Kepler.gl</h4>
+                <p>
+                  A step-by-step, no-code tutorial for mapping 11,808 earthquakes (2020&ndash;2026)
+                  in Kepler.gl: loading a CSV, animating it through time, styling it by magnitude,
+                  and saving the map. Includes screenshots of every step, tips, and what the
+                  official docs got wrong.
+                </p>
+                <div class="white-button">
+                  <a href="kepler-gl-tutorial.html">View Tutorial</a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -335,6 +349,14 @@ https://templatemo.com/tm-531-reflux
 
       $(window).scroll(function() {
         checkSection();
+      });
+
+      // Jump to a section when arriving from another page (e.g. index.html#section5)
+      $(window).on("load", function() {
+        var hash = window.location.hash;
+        if (hash && $('.section[data-section="' + hash.replace(/#/, "") + '"]').length) {
+          showSection(hash, false);
+        }
       });
     </script>
   </body>
