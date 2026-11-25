@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Where Do Flood Claims Fall Short? A Dashboard for a Real Client | Yola Charara</title>
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet" />
+    <link href="templatemo_531_reflux/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+      body { font-family: "Lato", sans-serif; color: #2b2b2b; background: #ffffff; line-height: 1.7; }
+      .project-page { max-width: 1000px; margin: 0 auto; padding: 48px 20px 80px; }
+      .back-link { display: inline-block; margin-bottom: 28px; color: #555; text-decoration: none; font-weight: 700; }
+      .back-link:hover { color: #000; }
+      h1 { font-weight: 900; font-size: 34px; margin-bottom: 8px; }
+      h2 { font-weight: 700; font-size: 24px; margin: 48px 0 6px; }
+      .intro { color: #555; font-size: 18px; margin-bottom: 8px; }
+      .chart-box { margin: 20px 0 22px; border: 1px solid #e3e0d8; background: #fbfaf7; padding: 10px; overflow-x: auto; }
+      .chart-box img { max-width: 100%; height: auto; display: block; }
+      .caption { font-size: 15px; color: #444; margin-top: -10px; margin-bottom: 18px; }
+      .sources { font-size: 15px; color: #555; margin-top: 40px; border-top: 1px solid #e3e0d8; padding-top: 18px; }
+      .sources a, .caption a, p a { color: #2b2b2b; text-decoration: underline; }
+    </style>
+  </head>
+
+  <body>
+    <div class="project-page">
+      <a class="back-link" href="index.html">&larr; Back to portfolio</a>
+
+      <h1>Where Do Flood Claims Fall Short? A Dashboard for a Real Client</h1>
+      <p class="intro">
+        A final project for DSC 502 (Data Visualization): an interactive Tableau dashboard built for an
+        actuarial scientist, using FEMA flood insurance claims.
+      </p>
+
+      <h2>The Client and the Question</h2>
+      <p>
+        My client, Th&eacute;r&egrave;se Ghanem, is an actuarial scientist. She had already analyzed FEMA's flood
+        insurance claims in a technical way, but the results were hard for non-technical readers to follow. She
+        needed an answer to one question: where, and by how much, are homeowners underinsured?
+      </p>
+      <p>
+        We defined "underinsured" in two ways. The main way is that the insurance payout was lower than the
+        actual building damage. The second is that the coverage was lower than the value of the home. The test
+        for success was simple: she can open a live link and, without any technical explanation, see how much of
+        the building damage insurance did not pay in each state, then drill down by flood zone and year.
+      </p>
+
+      <h2>The Finished Visualization</h2>
+      <div class="chart-box">
+        <div class='tableauPlaceholder' id='viz1795648573383' style='position: relative'><noscript><a href='#'><img alt='Where do flood claims fall short? ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Wh&#47;Wheredofloodclaimsfallshort5USStates&#47;Wheredofloodclaimsfallshort&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='Wheredofloodclaimsfallshort5USStates&#47;Wheredofloodclaimsfallshort' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Wh&#47;Wheredofloodclaimsfallshort5USStates&#47;Wheredofloodclaimsfallshort&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-GB' /></object></div>
+        <script type='text/javascript'>
+          var divElement = document.getElementById('viz1795648573383');
+          var vizElement = divElement.getElementsByTagName('object')[0];
+          if ( divElement.offsetWidth > 500 ) { vizElement.style.width='100%'; vizElement.style.height=(divElement.offsetWidth*0.6)+'px'; } else { vizElement.style.width='100%'; vizElement.style.height='1577px'; }
+          var scriptElement = document.createElement('script');
+          scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+          vizElement.parentNode.insertBefore(scriptElement, vizElement);
+        </script>
+      </div>
+      <p class="caption">
+        Figure 1. The final dashboard, built in Tableau Public. Click a state to see its counties, choose a flood
+        zone or a year range, and switch between the two measures. By default it shows the gap after the
+        deductible, with major events hidden.
+        <a href="https://public.tableau.com/views/Wheredofloodclaimsfallshort5USStates/Wheredofloodclaimsfallshort" target="_blank" rel="noopener">Open it in a new tab</a>.
+      </p>
+
+      <h2>Where the Data Came From</h2>
+      <p>
+        The data is FEMA's public NFIP Redacted Claims file from
+        <a href="https://www.fema.gov/openfema-data-page/fima-nfip-redacted-claims-v2" target="_blank" rel="noopener">OpenFEMA</a>.
+        It has about 2.7 million claims and 73 columns, and each row is one claim. I kept single-family homes in
+        Louisiana, Texas, Florida, New Jersey and New York from 1996 to 2024, which is 1,037,876 claims. About
+        802,000 of them have both a damage amount and a payout, and those are the claims the dashboard measures.
+      </p>
+      <p>
+        The full file is about 1 GB, so I used Python to turn it into a summary table of 17,156 rows, which keeps
+        the dashboard fast. The data audit turned up two things that shaped the design. About 20% of the claims
+        have no damage amount, and 84% of those were closed without payment, so the dashboard only measures paid
+        claims and says so on screen. Before 1996 there were too few claims per year to trust.
+      </p>
+
+      <h2>How I Got There</h2>
+      <p>
+        I started with a data audit and an exploration of the claims. The chart that surprised me most showed
+        Louisiana with 12.4% of building damage unpaid, but only 6.5% once the Katrina year was removed. That led to
+        my working takeaway: most of what a typical claim leaves unpaid is the deductible, which is what the
+        homeowner agrees to pay before insurance pays. For a typical claim, the median unpaid amount was $968 and
+        the median deductible was $1,000. The large gaps come from a few catastrophes and from coastal flood zones.
+      </p>
+      <p>
+        I drew three sketches: a small time series for each state, a scrolling story, and a map dashboard. I showed
+        them to Th&eacute;r&egrave;se and presented them to my class for feedback before building the final version.
+      </p>
+
+      <h2>Two Design Decisions</h2>
+      <p>
+        <strong>1. I chose the map dashboard over the other two sketches, and opened it on the states.</strong>
+        I chose the map because Th&eacute;r&egrave;se preferred it, it was the only sketch that showed the gap
+        geographically, and counties varied much more than states (from about 2% to 25% in my exploration). I
+        decided against opening with a story. When I presented the sketches in class, most people, like
+        Th&eacute;r&egrave;se, preferred opening directly on the state map and clicking into counties, while some
+        said a short story introduction would not hurt. To serve both, I put the state map, the county map and the
+        flood zone grid side by side on one screen, with a short "How to read this dashboard" guide at the top.
+        First-time viewers get the context they need without a separate story. I also left out a line chart over
+        time that came up in the feedback, because the flood zone by year grid already shows change over time.
+      </p>
+      <p>
+        <strong>2. I made ordinary years, after the deductible, the default view.</strong>
+        I decided against showing every year by default. A few catastrophe years hold between 81% and 97% of each
+        state's damage dollars, so they change the picture a lot: after the deductible, Louisiana is 3.1% unpaid in
+        ordinary years but 10.8% with the major events included. Th&eacute;r&egrave;se wanted the states to be
+        comparable, so the events are hidden at first, and a toggle brings them back.
+      </p>
+
+      <p class="sources">
+        Data: FEMA OpenFEMA, NFIP Redacted Claims v2
+        (<a href="https://www.fema.gov/openfema-data-page/fima-nfip-redacted-claims-v2" target="_blank" rel="noopener">data page</a>).
+        Definitions confirmed by the client. Built with Python (pandas) for the data preparation, Tableau Public for
+        the dashboard, and Claude for code suggestions and feedback on drafts.
+      </p>
+    </div>
+  </body>
+</html>
