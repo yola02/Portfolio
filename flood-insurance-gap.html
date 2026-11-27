@@ -51,7 +51,7 @@
         <script type='text/javascript'>
           var divElement = document.getElementById('viz1795648573383');
           var vizElement = divElement.getElementsByTagName('object')[0];
-          if ( divElement.offsetWidth > 500 ) { vizElement.style.width='100%'; vizElement.style.height=(divElement.offsetWidth*0.6)+'px'; } else { vizElement.style.width='100%'; vizElement.style.height='1577px'; }
+          if ( divElement.offsetWidth > 500 ) { vizElement.style.width='100%'; vizElement.style.height=(divElement.offsetWidth*0.65)+'px'; } else { vizElement.style.width='100%'; vizElement.style.height='1577px'; }
           var scriptElement = document.createElement('script');
           scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
           vizElement.parentNode.insertBefore(scriptElement, vizElement);
@@ -66,8 +66,9 @@
 
       <h2>Where the Data Came From</h2>
       <p>
-        The data is FEMA's public NFIP Redacted Claims file from
-        <a href="https://www.fema.gov/openfema-data-page/fima-nfip-redacted-claims-v2" target="_blank" rel="noopener">OpenFEMA</a>.
+        The data is FEMA's public NFIP Redacted Claims file from OpenFEMA (version 2, frozen as of
+        June 1, 2026; FEMA has since released 
+        <a href="https://www.fema.gov/openfema-data-page/nfip-redacted-claims-v3" target="_blank" rel="noopener">version 3</a>).
         It has about 2.7 million claims and 73 columns, and each row is one claim. I kept single-family homes in
         Louisiana, Texas, Florida, New Jersey and New York from 1996 to 2024, which is 1,037,876 claims. About
         802,000 of them have both a damage amount and a payout, and those are the claims the dashboard measures.
@@ -114,7 +115,7 @@
 
       <p class="sources">
         Data: FEMA OpenFEMA, NFIP Redacted Claims v2
-        (<a href="https://www.fema.gov/openfema-data-page/fima-nfip-redacted-claims-v2" target="_blank" rel="noopener">data page</a>).
+        (<a href="https://catalog.data.gov/dataset/fima-nfip-redacted-claims-openfema" target="_blank" rel="noopener">dataset record on Data.gov</a>).
         Definitions confirmed by the client. Built with Python (pandas) for the data preparation, Tableau Public for
         the dashboard, and Claude for code suggestions and feedback on drafts.
       </p>
