@@ -10,6 +10,14 @@ This site showcases data visualization and machine learning projects, built with
 
 ## Projects
 
+### Where Do Flood Claims Fall Short? A Dashboard for a Real Client
+The final project for a data visualization course, built for a real client, an actuarial scientist. An interactive Tableau dashboard shows where, and by how much, flood insurance payouts fall short of building damage in Louisiana, Texas, Florida, New Jersey and New York. Users can click a state to see its counties, filter by flood zone and year, and switch between two measures: payout below damage and coverage below home value. The page covers the client's question, where the data came from and how it was prepared, and the design decisions behind the final version, including why the map dashboard was chosen over a time series and a scrolling story.
+
+- **Tools:** Tableau Public, Python, pandas
+- **Dataset:** [FEMA OpenFEMA, NFIP Redacted Claims v2](https://catalog.data.gov/dataset/fima-nfip-redacted-claims-openfema)
+- **Dashboard on Tableau Public:** [Where do flood claims fall short?](https://public.tableau.com/views/Wheredofloodclaimsfallshort5USStates/Wheredofloodclaimsfallshort)
+- **View it live:** [flood-insurance-gap.html](https://yola02.github.io/Portfolio/flood-insurance-gap.html)
+
 ### Safest Countries 2026: A Data Visualization Study
 Four interactive charts exploring how "safety" is measured differently across the 20 safest countries in the world — comparing a categorical risk rating against multiple numeric safety indices, and examining where those measures agree or diverge.
 
@@ -45,6 +53,7 @@ More projects will be added here as they're completed.
 - HTML / CSS / JavaScript
 - [Vega-Lite](https://vega.github.io/vega-lite/) / [vega-embed](https://github.com/vega/vega-embed)
 - [Kepler.gl](https://kepler.gl)
+- [Tableau Public](https://public.tableau.com)
 - Python, pandas, Altair
 - Hosted on GitHub Pages
 
@@ -57,3 +66,5 @@ Original government debt infographic by Visual Capitalist.
 Global temperature data from the Kaggle dataset *Global Climate & Energy Transition 2000-2026* by sergionefedov.
 
 Earthquake data from the Kaggle dataset *Global Earthquakes 2020-2026* by zaneneave.
+
+Flood insurance claims data from FEMA's OpenFEMA dataset *NFIP Redacted Claims v2*.
